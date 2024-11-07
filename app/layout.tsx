@@ -15,10 +15,12 @@ const spaceGrotesk = localFont({
   weight: "300 400 500 700",
 });
 
-
 export const metadata: Metadata = {
   title: "Dev Xperts",
-  description: "Where bugs come to rest in peace",
+  description: "The ultimate destination where bugs come to rest in peace! Dev Xperts is a vibrant, expert-driven forum designed to solve your development challenges with ease and speed. Whether you're wrestling with complex code issues, seeking advice on best practices, or looking to share insights, Dev Xperts is here to make problem-solving faster and more collaborative. Our community of seasoned developers and coding enthusiasts ensures you’re never alone on the journey to debug, refine, and perfect your projects.",
+  icons: {
+    icon: "/images/site-logo.svg",
+  },
 };
 
 export default function RootLayout({
