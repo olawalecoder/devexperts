@@ -59,7 +59,9 @@ const config: Config = {
   		'space-grotesk': ["var(--font-space-grotesk)"]
   	},
   	screens: {
+		sm:	'640px',
   		xs: '420px'
+
   	}
   },
   plugins: [require("tailwindcss-animate")],
