@@ -12,6 +12,7 @@ body {
 }
 
 @layer utilities {
+
     .background-light850_dark100 {
         @apply bg-light-850 dark:bg-dark-100;
     }
@@ -216,6 +217,13 @@ body {
         @apply shadow-light-100 dark:shadow-none;
     }
 
+    .shadow-light300_darknone {
+        box-shadow: var(--tw-shadow) !important; /* light mode */
+    }
+
+    .dark .shadow-light300_darknone {
+        box-shadow: none !important;
+    }
     .primary-gradient {
         background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);
     }

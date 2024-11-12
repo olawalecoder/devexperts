@@ -5,7 +5,7 @@ import Theme from "@/components/navigation/navbar/Theme";
 
 const Navbar = () => {
     return (
-        <nav className="background-light900_dark200 w-full flex-between p-6 dark:shadow-none shadow-light-300 fixed z-50 gap-5 sm:px-12">
+        <nav className="background-light900_dark200 w-full flex-between p-6 shadow-light300_darknone fixed z-50 gap-5 sm:px-12">
             <Link href="/" className="flex items-center gap-1">
                 <Image
                     src="/images/site-logo.svg"
