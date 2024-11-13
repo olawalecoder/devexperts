@@ -4,7 +4,7 @@ import {Button} from "@/components/ui/button";
 
 const Home = async () => {
     const session = await auth()
-    console.log(session);
+    console.log(session)
   return (
       <>
           <h1 className="h1-bold">
