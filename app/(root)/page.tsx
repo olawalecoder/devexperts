@@ -13,16 +13,6 @@ const Home = async () => {
           <h1 className="text-5xl font-space-grotesk">
               Welcome to DevExperts
           </h1>
-
-          <form
-              className="px-10 pt-3"
-              action={async () => {
-                  "use server"
-                  await signOut({redirectTo: ROUTES.SIGN_IN})
-              }}
-          >
-              <Button type="submit">Log out</Button>
-          </form>
       </>
   );
 }
