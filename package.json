@@ -17,6 +17,7 @@
     "@radix-ui/react-toast": "^1.2.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "devicon": "^2.16.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-tailwindcss": "^3.17.5",
