@@ -51,15 +51,18 @@ const LocalSearch = ({route, imgSrc, placeholder, otherClasses}: Props) => {
         <div
             className={`background-light800_darkgradient flex min-h-[56px] grow items-center gap-4 rounded-[10px] px-4 ${otherClasses}`}
         >
-            <Image
-                src={imgSrc}
-                width={24}
-                height={24}
-                alt="Search"
-                className="cursor-pointer"
-            />
+            <label htmlFor="search">
+                <Image
+                    src={"/icons/search.svg"}
+                    width={24}
+                    height={24}
+                    alt="search icon"
+                    className="invert-colors cursor-pointer"
+                />
+            </label>
 
             <Input
+                id="search"
                 type="text"
                 placeholder={placeholder}
                 value={searchQuery}
