@@ -24,10 +24,10 @@ const HomeFilter = () => {
     const [active, setActive] = useState(filterParams || "");
 
     const handleTypeClick = (filter: string) => {
-        let newUrl = ""
+        let newUrl = "";
 
         if (filter === active) {
-            setActive(filter);
+            setActive("");
             newUrl = removeKeysFromUrlQuery({
                 params: searchParams.toString(),
                 keysToRemove: ["filter"],

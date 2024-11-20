@@ -40,3 +40,4 @@ export const removeKeysFromUrlQuery = ({
         { skipNull: true }
     );
 };
+
