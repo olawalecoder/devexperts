@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+    server: ['pino', 'pino-pretty' ],
     images: {
         remotePatterns: [
             {
