@@ -9,15 +9,16 @@ import {Toaster} from "@/components/ui/toaster";
 import ThemeProvider from "@/context/Theme";
 
 const inter = localFont({
-  src: "./fonts/InterVf.ttf",
-  variable: "--font-inter",
-  weight: "100 200 300 400 500 600 700 800 900",
-});
+  src: './fonts/InterVf.ttf',
+  weight: '100 900',
+  style: 'normal',
+  variable: '--font-inter'
+})
 
 const spaceGrotesk = localFont({
     src: "./fonts/SpaceGroteskVF.ttf",
     variable: "--font-space-grotesk",
-    weight: "300 400 500 700",
+    weight: "300 700",
 });
 
 export const metadata: Metadata = {
