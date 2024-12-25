@@ -9,13 +9,13 @@ import {Toaster} from "@/components/ui/toaster";
 import ThemeProvider from "@/context/Theme";
 
 const inter = localFont({
-  src: "/fonts/InterVf.ttf",
+  src: "./fonts/InterVf.ttf",
   variable: "--font-inter",
   weight: "100 200 300 400 500 600 700 800 900",
 });
 
 const spaceGrotesk = localFont({
-    src: "/fonts/SpaceGroteskVF.ttf",
+    src: "./fonts/SpaceGroteskVF.ttf",
     variable: "--font-space-grotesk",
     weight: "300 400 500 700",
 });
