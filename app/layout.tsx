@@ -9,7 +9,7 @@ import {Toaster} from "@/components/ui/toaster";
 import ThemeProvider from "@/context/Theme";
 
 const inter = localFont({
-  src: './fonts/InterVf.ttf',
+  src: './fonts/InterVF.ttf',
   weight: '100 900',
   style: 'normal',
   variable: '--font-inter'
