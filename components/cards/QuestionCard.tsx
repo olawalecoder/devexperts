@@ -5,6 +5,7 @@ import TagCard from "@/components/cards/TagCard";
 import Metric from "@/components/Metric";
 import ROUTES from "@/constants/routes";
 import {getTimeStamp} from "@/lib/utils";
+import {Question, Tag} from "@/types/global";
 
 interface Props {
     question: Question;
@@ -31,7 +32,13 @@ const QuestionCard = ({question: { _id, title, tags, author, createdAt, upvotes,
 
             <div className="flex-between mt-6 w-full flex-wrap gap-3" >
                 <Metric
-                    imgUrl={author.image}
+                    imgUrl={author.image || ""}
+                    authorInitials={author.name
+                        .split(" ")
+                        .map((word: string) => word[0])
+                        .join("")
+                        .toUpperCase()
+                        .slice(0, 1)}
                     alt={author.name}
                     value={author.name}
                     title={`• asked ${getTimeStamp(createdAt)}`}

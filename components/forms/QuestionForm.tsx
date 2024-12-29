@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MDXEditorMethods } from "@mdxeditor/editor";
 import { ReloadIcon } from "@radix-ui/react-icons";
-import {Params} from "next/dist/server/request/params";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import React, { useRef, useTransition } from "react";
@@ -12,7 +11,7 @@ import { z } from "zod";
 
 import ROUTES from "@/constants/routes";
 import { toast } from "@/hooks/use-toast";
-import {createQuestion, editQuestion} from "@/lib/actions/question.action";
+import { createQuestion, editQuestion } from "@/lib/actions/question.action";
 import { AskQuestionSchema } from "@/lib/validations";
 import {Question} from "@/types/global";
 
@@ -38,7 +37,7 @@ interface Params {
     isEdit?: boolean;
 }
 
-const QuestionForm = ({question, isEdit = false} : Params) => {
+const QuestionForm = ({ question, isEdit = false }: Params) => {
     const router = useRouter();
     const editorRef = useRef<MDXEditorMethods>(null);
     const [isPending, startTransition] = useTransition();
@@ -96,8 +95,11 @@ const QuestionForm = ({question, isEdit = false} : Params) => {
         data: z.infer<typeof AskQuestionSchema>
     ) => {
         startTransition(async () => {
-            if(isEdit && question) {
-                const result = await editQuestion({questionId : question?._id, ...data});
+            if (isEdit && question) {
+                const result = await editQuestion({
+                    questionId: question?._id,
+                    ...data,
+                });
 
                 if (result.success) {
                     toast({
@@ -241,7 +243,7 @@ const QuestionForm = ({question, isEdit = false} : Params) => {
                                 <span>Submitting</span>
                             </>
                         ) : (
-                            <>{isEdit ? "Edit" : "Ask A Question"}</>
+                            <>{isEdit ? "Edit" : "Ask a Question"}</>
                         )}
                     </Button>
                 </div>
