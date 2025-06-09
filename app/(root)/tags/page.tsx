@@ -1,58 +1,51 @@
-import React from "react";
+import TagCard from "@/components/cards/TagCard";
+import DataRenderer from "@/components/DataRenderer";
+import LocalSearch from "@/components/search/LocalSearch";
+import ROUTES from "@/constants/routes";
+import { EMPTY_TAGS } from "@/constants/states";
+import { getTags } from "@/lib/actions/tag.actions";
+import { RouteParams } from "@/types/global";
 
-const tags = [
-    { id: 1, name: "Reactjs", questions: 0 },
-    { id: 2, name: "mongoose", questions: 1 },
-    { id: 3, name: "mongodb", questions: 1 },
-    { id: 4, name: "javascript", questions: 7 },
-    { id: 5, name: "nextjs", questions: 2 },
-    { id: 6, name: "redux", questions: 1 },
-    { id: 7, name: "react.js", questions: 1 },
-    { id: 8, name: "es6", questions: 1 },
-    { id: 9, name: "next.js", questions: 1 },
-    { id: 10, name: "express", questions: 1 },
-];
+const Tags = async ({ searchParams }: RouteParams) => {
+  const { page, pageSize, query, filter } = await searchParams;
 
-const Tags = () => {
-    return (
-        <div className="min-h-screen text-white">
-            <div className="container mx-auto px-4 py-10">
+  const { success, data, error } = await getTags({
+    page: Number(page) || 1,
+    pageSize: Number(pageSize) || 10,
+    query,
+    filter,
+  });
 
-                <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                    {tags.map((tag) => (
-                        <div
-                            key={tag.id}
-                            className="shadow-md background-light900_dark200 light-border flex flex-col items-start rounded-lg p-6"
-                        >
+  const { tags } = data || {};
 
-                            <h2 className="mb-2 text-lg font-bold">{tag.name}</h2>
+  return (
+    <>
+      <h1 className="h1-bold text-dark100_light900 text-3xl">Tags</h1>
 
+      <section className="mt-11">
+        <LocalSearch
+          route={ROUTES.TAGS}
+          imgSrc="/icons/search.svg"
+          placeholder="Search tags..."
+          otherClasses="flex-1"
+        />
+      </section>
 
-                            <p className="text-sm text-gray-400">
-                                <span className="font-bold text-orange-500">{tag.questions}+</span> Questions
-                            </p>
-                        </div>
-                    ))}
-                </div>
-
-
-                <div className="flex items-center justify-center space-x-4">
-                    <button
-                        className="rounded-md bg-gray-800 px-4 py-2 text-white hover:bg-gray-700 disabled:opacity-50"
-                        disabled
-                    >
-                        Prev
-                    </button>
-                    <button className="rounded-md bg-orange-500 px-4 py-2 font-bold text-white">
-                        1
-                    </button>
-                    <button className="rounded-md bg-gray-800 px-4 py-2 text-white hover:bg-gray-700">
-                        Next
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
+      <DataRenderer
+        success={success}
+        error={error}
+        data={tags}
+        empty={EMPTY_TAGS}
+        render={(tags) => (
+          <div className="mt-10 flex w-full flex-wrap gap-4">
+            {tags.map((tag) => (
+              <TagCard key={tag._id} {...tag} />
+            ))}
+          </div>
+        )}
+      />
+    </>
+  );
 };
 
 export default Tags;
