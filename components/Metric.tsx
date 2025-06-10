@@ -1,56 +1,61 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from 'react';
+import React from "react";
+
+import { cn } from "@/lib/utils";
 
 interface Props {
-    imgUrl: string;
-    alt: string;
-    value: string | number;
-    title: string;
-    href?: string;
-    textStyles: string;
-    imgStyles?: string;
-    isAuthor?: boolean;
-    authorInitials?: string;
+  imgUrl: string;
+  alt: string;
+  value: string | number;
+  title: string;
+  href?: string;
+  textStyles: string;
+  imgStyles?: string;
+  isAuthor?: boolean;
+  titleStyles?: string;
 }
 
-const Metric = ({ imgUrl, alt, value, title, href, textStyles, imgStyles, isAuthor, authorInitials }: Props) => {
+const Metric = ({
+  imgUrl,
+  alt,
+  value,
+  title,
+  href,
+  textStyles,
+  imgStyles,
+  isAuthor,
+  titleStyles,
+}: Props) => {
+  const metricContent = (
+    <>
+      <Image
+        src={imgUrl}
+        width={16}
+        height={16}
+        alt={alt}
+        className={`rounded-full object-contain ${imgStyles}`}
+      />
 
-    const metricContent = (
-        <>
-            {imgUrl ? (
-                <Image
-                    src={imgUrl}
-                    width={16}
-                    height={16}
-                    alt={alt}
-                    className={`rounded-full object-contain ${imgStyles}`}
-                />
-            ) : (
-                <div className={`primary-gradient flex size-[16] items-center justify-center rounded-full font-space-grotesk text-[12px] font-bold tracking-wider text-white`}>
-                    {authorInitials}
-                </div>
-            )}
+      <p className={`${textStyles} flex items-center gap-1`}>
+        {value}
 
-            <p className={`${textStyles} flex items-center gap-1`}>
-                {value}
+        {title ? (
+          <span className={cn(`small-regular line-clamp-1`, titleStyles)}>
+            {title}
+          </span>
+        ) : null}
+      </p>
+    </>
+  );
 
-                <span
-                    className={`small-regular line-clamp-1 ${isAuthor ? "max-sm:hidden" : ""}`}
-                >
-                    {title}
-                </span>
-            </p>
-        </>
-    );
-
-    return href ? (
-        <Link href={href} className="flex-center gap-1">
-            {metricContent}
-        </Link>
-    ) : (
-        <div className="flex-center gap-1">{metricContent}</div>
-    );
+  return href ? (
+    <Link href={href} className="flex-center gap-1">
+      {metricContent}
+    </Link>
+  ) : (
+    <div className="flex-center gap-1">{metricContent}</div>
+  );
 };
 
 export default Metric;
