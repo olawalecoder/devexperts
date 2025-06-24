@@ -36,8 +36,9 @@ import "./dark-editor.css";
 
 type InitializedEditorProps = {
   editorRef: ForwardedRef<MDXEditorMethods> | null;
-  fieldChange: (value: string) => void;
-} & MDXEditorProps;
+  onChange: (value: string) => void;
+  markdown: string;
+} & Omit<MDXEditorProps, "onChange" | "markdown">;
 
 const codeBlockLanguages = {
   txt: "Plain Text",
@@ -72,7 +73,8 @@ const codeBlockLanguages = {
 
 export default function InitializedMDXEditor({
   editorRef,
-  fieldChange,
+  markdown,
+  onChange,
   ...props
 }: InitializedEditorProps) {
   const { resolvedTheme } = useTheme();
@@ -82,8 +84,9 @@ export default function InitializedMDXEditor({
     <MDXEditor
       key={resolvedTheme}
       ref={editorRef}
-      className="grid border light-border-2 w-full background-light800_dark200 markdown-editor dark-editor"
-      onChange={fieldChange}
+      className="prose max-w-full grid border light-border-2 w-full background-light800_dark200 markdown-editor dark-editor prose-headings:text-dark200_light900 prose-p:text-dark200_light900"
+      markdown={markdown}
+      onChange={onChange}
       plugins={[
         headingsPlugin(),
         listsPlugin(),

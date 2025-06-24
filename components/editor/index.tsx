@@ -17,10 +17,10 @@ const InitializedEditor = dynamic(() => import("./InitializedMDXEditor"), {
 const Editor = forwardRef<MDXEditorMethods, EditorProps>(
   ({ value, fieldChange, ...props }, ref) => (
     <InitializedEditor
-      {...props}
-      markdown={value}
-      fieldChange={fieldChange}
       editorRef={ref}
+      markdown={value}
+      onChange={fieldChange}
+      {...props}
     />
   )
 );

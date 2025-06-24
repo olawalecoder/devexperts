@@ -87,6 +87,24 @@ const AnswerForm = ({ questionId, questionTitle, questionContent }: Props) => {
     setIsAISubmitting(true);
 
     try {
+      // Ensure content meets minimum length requirement
+      if (questionContent.length < 100) {
+        return toast({
+          title: "Error",
+          description: "Question content must be at least 100 characters long",
+          variant: "destructive",
+        });
+      }
+
+      // Ensure title meets length requirements
+      if (questionTitle.length < 5 || questionTitle.length > 130) {
+        return toast({
+          title: "Error",
+          description: "Question title must be between 5 and 130 characters",
+          variant: "destructive",
+        });
+      }
+
       const { success, data, error } = await api.ai.getAnswer(
         questionTitle,
         questionContent
@@ -102,11 +120,16 @@ const AnswerForm = ({ questionId, questionTitle, questionContent }: Props) => {
 
       const formattedAnswer = data.replace(/<br>/g, " ").toString().trim();
 
+      // First update the form state
+      form.setValue("content", formattedAnswer, {
+        shouldValidate: true,
+        shouldDirty: true,
+        shouldTouch: true
+      });
+
+      // Then manually update the editor content
       if (editorRef.current) {
         editorRef.current.setMarkdown(formattedAnswer);
-
-        form.setValue("content", formattedAnswer);
-        form.trigger("content");
       }
 
       toast({
@@ -169,8 +192,8 @@ const AnswerForm = ({ questionId, questionTitle, questionContent }: Props) => {
               <FormItem className="flex w-full flex-col gap-3">
                 <FormControl>
                   <Editor
+                    ref={editorRef}
                     value={field.value}
-                    editorRef={editorRef}
                     fieldChange={field.onChange}
                   />
                 </FormControl>
