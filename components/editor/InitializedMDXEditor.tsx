@@ -84,7 +84,7 @@ export default function InitializedMDXEditor({
     <MDXEditor
       key={resolvedTheme}
       ref={editorRef}
-      className="prose max-w-full grid border light-border-2 w-full background-light800_dark200 markdown-editor dark-editor prose-headings:text-dark200_light900 prose-p:text-dark200_light900"
+      className="markdown prose grid break-words border light-border-2 w-full background-light800_dark200 dark-editor"
       markdown={markdown}
       onChange={onChange}
       plugins={[
