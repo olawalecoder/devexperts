@@ -4,7 +4,7 @@ import {Session} from "next-auth";
 import {ZodError, ZodSchema} from "zod";
 
 import {auth} from "@/auth";
-import {UnauthorizedError, ValidationError} from "@/lib/http-errors";
+import {RequestError, UnauthorizedError, ValidationError} from "@/lib/http-errors";
 import dbConnect from "@/lib/mongoose";
 
 type ActionOptions<T> = {
@@ -38,7 +38,13 @@ async function action<T>({
             return new UnauthorizedError();
         }
     }
-    await dbConnect()
+    try {
+        await dbConnect();
+    } catch {
+        // Action callers already render Error results. Do not crash the whole RSC page
+        // or expose connection details when Atlas is temporarily unavailable.
+        return new RequestError(503, "We couldn’t load the data. Please try again shortly.");
+    }
 
     return {params, session}
 }
